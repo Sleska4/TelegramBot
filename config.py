@@ -1,4 +1,4 @@
-TOKEN = '' # <---- место для токена
+TOKEN = ''
 import telebot
 
 # Преветственный текст
@@ -25,6 +25,6 @@ def menu():
 def LIST(arr):
     list_arr = ''
     for i in range(len(arr)):
-        arr[i].insert(0, str(i + 1) + ')')
+        arr[i][0] = (str(i + 1) + ')')
         list_arr += str(arr[i][0]) + '   ' + str(arr[i][1]) + '    ' + str(arr[i][2]) + '\n'
     return (list_arr)
