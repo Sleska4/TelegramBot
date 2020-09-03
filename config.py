@@ -14,12 +14,19 @@ img = ['stic/AnimatedSticker.tgs', 'stic/AnimatedSticker1.tgs', 'stic/AnimatedSt
 arr = []
 
 
+########################################################################################################################
 def menu():
     markup = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
     LIST = telebot.types.KeyboardButton("Список 🗒")
     ADD = telebot.types.KeyboardButton("Добавить 📌")
     DEL = telebot.types.KeyboardButton("Удалить 🗑")
     return (markup.add(LIST, ADD, DEL))
+
+
+def cancel():
+    cancel_ = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
+    end = telebot.types.KeyboardButton("ОТМЕНА ❌")
+    return (cancel_.add(end))
 
 
 def LIST(arr):

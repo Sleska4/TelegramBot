@@ -25,6 +25,34 @@ def add_f(message):
     bot.send_message(message.chat.id, 'Хотите добавить время?'.format(message.from_user, bot.get_me()), reply_markup=time)
 
 
+def data_add(message):
+    data = message.text
+    if data in ['1', '2', '3', '4', '5', '6', '7']:
+        config.arr[len(config.arr) - 1].append('mod' + str(data))
+        bot.send_message(message.chat.id, 'Дата изменена на {}'.format('mod' + str(data)), reply_markup=config.menu())
+    else:
+        try:
+            data_boolean = False
+            data = str(data)
+            data = data.split('.')
+            if 1 <= int(data[0]) <= 31:
+                if 1 <= int(data[1]) <= 12:
+                    data_boolean = True
+            if data_boolean:
+                data = '.'.join(data)
+                config.arr[len(config.arr) - 1].append(data)
+                bot.send_message(message.chat.id, 'Данные успешно обновлены ✅', reply_markup=config.menu())
+                print(config.arr, 'test')
+        except:
+            if data == ['ОТМЕНА ❌']:  # Пока под вопросом
+                config.arr[len(config.arr) - 1].append('mod1')  # Пока под вопросом
+                bot.send_message(message.chat.id, 'Дата поставленна на каждый день', reply_markup=config.menu())
+            else:
+                bot.send_message(message.chat.id, 'Данные введены некоректно, попробуйте снова.', reply_markup=config.menu())
+                data = bot.send_message(message.chat.id, 'Хотите указать дату?', reply_markup=config.cancel())
+                bot.register_next_step_handler(data, data_add)
+
+
 def time_add(message):
     time = message.text
     if time != "Нет, спасибо ❌":
@@ -32,14 +60,17 @@ def time_add(message):
             time_boolean = False
             time = str(time)
             time = time.split(':')
-            if 0 < int(time[0]) < 24:
-                if 0 < int(time[1]) < 60:
-                    if 0 < int(time[2]) < 60:
+            if 0 <= int(time[0]) < 24:
+                if 0 <= int(time[1]) < 60:
+                    if 0 <= int(time[2]) < 60:
                         time_boolean = True
             if time_boolean:
                 time = ':'.join(time)
                 config.arr[len(config.arr) - 1].append(time)
-                bot.send_message(message.chat.id, 'Данные успешно обновлены ✅', reply_markup=config.menu())
+                bot.send_message(message.chat.id, 'Данные успешно обновлены ✅')
+                data = bot.send_message(message.chat.id, 'Хотите указать дату?', reply_markup=config.cancel())
+                bot.register_next_step_handler(data, data_add)
+
             else:
                 bot.send_message(message.chat.id, 'Вы ввели какую-то поебень 😱', reply_markup=config.menu())
                 del config.arr[-1]
