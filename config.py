@@ -26,7 +26,14 @@ def menu():
 def cancel():
     cancel_ = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
     end = telebot.types.KeyboardButton("ОТМЕНА ❌")
-    return (cancel_.add(end))
+    return cancel_.add(end)
+
+
+def accept():
+    accept_ = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
+    no = telebot.types.KeyboardButton("ОТМЕНА ❌")
+    yes = telebot.types.KeyboardButton("ПРИНЯТЬ ✅")
+    return accept_.add(no, yes)
 
 
 def LIST(arr):
@@ -35,3 +42,9 @@ def LIST(arr):
         arr[i][0] = (str(i + 1) + ')')
         list_arr += str(arr[i][0]) + '   ' + str(arr[i][1]) + '    ' + str(arr[i][2]) + '\n'
     return (list_arr)
+
+
+def update():
+    sql = open('text/main.txt', 'w')
+    sql.write(LIST(arr))
+    sql.close()
