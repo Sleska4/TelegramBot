@@ -1,4 +1,4 @@
-TOKEN = ''
+TOKEN = '1261183171:AAHffgXyyPR3V0tCAJ0P0Fy8jktCiLg1ASU'
 import telebot
 
 # Преветственный текст
@@ -11,10 +11,26 @@ img = ['stic/AnimatedSticker.tgs', 'stic/AnimatedSticker1.tgs', 'stic/AnimatedSt
        'stic/AnimatedSticker3.tgs', 'stic/AnimatedSticker4.tgs', 'stic/AnimatedSticker5.tgs',
        'stic/AnimatedSticker6.tgs', ]
 
-arr = []
+arr = [['1)', 'alex', ' 12:51:11'],['1)', 'alex', ' 20:10:21']]
 
 
 ########################################################################################################################
+
+sql = open('text/main.txt', 'r', encoding="utf-8").read().split('\n')
+sql = sql[:-1]
+a = [[]]
+b = []
+x, y = 1, 4
+for i in sql:
+    a += str(i).split('   ')
+for i in range(len(a) // 3):
+    b.append([])
+    b[i] += a[x:y]
+    x += 3
+    y += 3
+arr = b
+
+
 def menu():
     markup = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
     LIST = telebot.types.KeyboardButton("Список 🗒")

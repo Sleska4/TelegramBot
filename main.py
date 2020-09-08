@@ -2,6 +2,7 @@ import config
 import telebot
 import random
 
+
 bot = telebot.TeleBot(config.TOKEN)
 
 
@@ -95,7 +96,7 @@ def time_add(message):
 def del_index(message):
     del_input = message.text
     arr_test = config.arr * 2
-    arr_test = arr_test[0: int(len(arr_test) / 2)]  # Костыль, не трогать
+    arr_test = arr_test[: int(len(arr_test) / 2)]  # Костыль, не трогать
     try:
         del_input = int(del_input)
         if del_input < len(config.arr) + 1:

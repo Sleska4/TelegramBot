@@ -1,7 +1,13 @@
-sql = ''
-with open('text/main.txt', 'r') as f:
-    sql += f.readlines()
+import pyttsx3
+import time
+import config
 
-with open('text/main.txt', 'w') as f:
-    f.writelines(sql[1:])
-print(sql)
+
+engine = pyttsx3.init()
+
+while True:
+    for i in config.arr:
+        print((time.ctime()).split(' ')[4])
+        if i[2][1:] == time.ctime().split(' ')[4]:
+            engine.say(i[1])
+            engine.runAndWait()
