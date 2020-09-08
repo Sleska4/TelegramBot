@@ -1,4 +1,4 @@
-TOKEN = '1261183171:AAHffgXyyPR3V0tCAJ0P0Fy8jktCiLg1ASU'
+TOKEN = ''
 import telebot
 
 # Преветственный текст
