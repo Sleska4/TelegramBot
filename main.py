@@ -2,7 +2,6 @@ import config
 import telebot
 import random
 
-
 bot = telebot.TeleBot(config.TOKEN)
 
 
@@ -63,7 +62,6 @@ def data_add(message):
     config.update()
 
 
-
 def time_add(message):
     time = message.text
     if time != "Нет, спасибо ❌":
@@ -98,9 +96,7 @@ def del_index(message):
     arr_test = config.arr * 2
     arr_test = arr_test[: int(len(arr_test) / 2)]  # Костыль, не трогать
     try:
-        del_input = int(del_input)
-        if del_input < len(config.arr) + 1:
-            del arr_test[del_input - 1]
+        del arr_test[(int(del_input)) - 1]
     except:
 
         del_input = del_input.split(' ')
@@ -121,7 +117,10 @@ def del_index(message):
             except:
                 continue
 
-    bot.send_message(message.chat.id, config.LIST(arr_test))
+    if arr_test != []:
+        bot.send_message(message.chat.id, config.LIST(arr_test))
+    else:
+        bot.send_message(message.chat.id, 'Ваш список окажется пустым')
     del_accept = bot.send_message(message.chat.id, 'Хототе ли вы внести изменения?', reply_markup=config.accept())
 
     def del_end(message):
